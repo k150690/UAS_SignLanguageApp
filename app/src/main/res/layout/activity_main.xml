@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal"
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/person" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama User"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title: Belum Ada"
+            android:textColor="#FF9800"
+            android:textSize="16sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/tvCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Koin: 0"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnBelajar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mulai Belajar (Flashcard)"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnKuis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main Kuis"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnToko"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Toko Item"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnLeaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Leaderboard Lokal"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
