@@ -1,56 +1,41 @@
 package edu.uph.m24si1.uas_signlanguageapp;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class LeaderboardActivity extends AppCompatActivity {
-    class Player implements Comparable<Player> {
-        String name;
-        int score;
-        String title;
-
-        Player(String name, int score, String title) {
-            this.name = name;
-            this.score = score;
-            this.title = title;
-        }
-
-        @Override
-        public int compareTo(Player other) {
-            return Integer.compare(other.score, this.score);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
-
         TextView tvRankingBox = findViewById(R.id.tvRankingBox);
-        ArrayList<Player> players = new ArrayList<>();
 
-        players.add(new Player("Siti", 150, "Pakar Isyarat"));
-        players.add(new Player("Budi", 90, "Silent Speaker"));
-        players.add(new Player("Agus", 45, "Isyarat Newbie"));
+        SharedPreferences sharedPref = getSharedPreferences("SignTeachPrefs", Context.MODE_PRIVATE);
 
-        SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
-        String myName = prefs.getString("USERNAME", "User");
-        int myScore = prefs.getInt("TOTAL_KOIN", 0);
-        String myTitle = prefs.getString("EQUIPPED_TITLE", "Pemula");
+        String namaAku = sharedPref.getString("USER_NAME", "JL");
+        String titleAku = sharedPref.getString("CURRENT_USER_TITLE", "NPC Berbakat ️");
+        int koinAku = sharedPref.getInt("TOTAL_KOIN", 80);
 
-        players.add(new Player(myName + " (Kamu)", myScore, myTitle));
-        Collections.sort(players);
+        String teksPeringkat =
+                "1. Anastasia Willim - 180 Poin\n" +
+                        "   Pakar Isyarat\n\n" +
 
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < players.size(); i++) {
-            Player p = players.get(i);
-            result.append(i + 1).append(". ").append(p.name).append("\n")
-                    .append("   Skor: ").append(p.score).append(" | [").append(p.title).append("]\n\n");
-        }
-        tvRankingBox.setText(result.toString());
+                        "2. Vivien - 140 Poin\n" +
+                        "   Silent Speaker\n\n" +
+
+                        "3. " + namaAku + " - " + koinAku + " Poin\n" +
+                        "   " + titleAku + "\n\n" +
+
+                        "4. Andi Wijaya - 90 Poin\n" +
+                        "   Isyarat Newbie\n\n" +
+
+                        "5. Roni Skena - 40 Poin\n" +
+                        "   Masih Pemula";
+
+        tvRankingBox.setText(teksPeringkat);
     }
 }

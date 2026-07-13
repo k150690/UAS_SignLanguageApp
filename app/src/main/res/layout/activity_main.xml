@@ -1,79 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@color/cream">
+
+    <ImageView
+    android:id="@+id/imgAvatar"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginTop="16dp"
+    android:src="@drawable/person" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JL"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NPC berbakat"
+        android:textColor="@color/brown"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_marginBottom="24dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal"
-        android:background="#FFFFFF">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp">
 
-        <ImageView
-            android:id="@+id/imgAvatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/person" />
-
-        <TextView
-            android:id="@+id/tvUsername"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nama User"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Title: Belum Ada"
-            android:textColor="#FF9800"
-            android:textSize="16sp"
-            android:textStyle="italic"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💰 Koin"
+                android:textColor="@color/blue"
+                android:textSize="14sp"/>
 
-        <TextView
-            android:id="@+id/tvCoins"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Koin: 0"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"/>
+            <TextView
+                android:id="@+id/tvCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80"
+                android:textColor="@color/blue"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnBelajar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mulai Belajar (Flashcard)"
-            android:layout_marginBottom="12dp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/bblue"/>
 
-        <Button
-            android:id="@+id/btnKuis"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Main Kuis"
-            android:layout_marginBottom="12dp"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/btnToko"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Toko Item"
-            android:layout_marginBottom="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔥 Streak"
+                android:textColor="@color/blue"
+                android:textSize="14sp"/>
 
-        <Button
-            android:id="@+id/btnLeaderboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Leaderboard Lokal"/>
+            <TextView
+                android:id="@+id/tvStreak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 Hari"
+                android:textColor="@color/brown"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnBelajar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Mulai Belajar"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/blue"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnKuis"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Main Kuis"
+        android:textColor="@color/blue"
+        android:backgroundTint="@color/bblue"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnToko"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Toko Item"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brown"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnLeaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Leaderboard"
+        android:textColor="@color/brown"
+        android:backgroundTint="@color/blush"/>
+
+</LinearLayout>

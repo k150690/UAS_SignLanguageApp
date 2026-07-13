@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvUsername, tvTitle, tvCoins;
+    private TextView tvUsername, tvTitle, tvCoins, tvStreak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         tvUsername = findViewById(R.id.tvUsername);
         tvTitle = findViewById(R.id.tvTitle);
         tvCoins = findViewById(R.id.tvCoins);
+        tvStreak = findViewById(R.id.tvStreak);
 
         Button btnBelajar = findViewById(R.id.btnBelajar);
         Button btnKuis = findViewById(R.id.btnKuis);
@@ -38,5 +39,6 @@ public class MainActivity extends AppCompatActivity {
         tvUsername.setText(prefs.getString("USERNAME", "User"));
         tvTitle.setText("Title: " + prefs.getString("EQUIPPED_TITLE", "Pemula"));
         tvCoins.setText("Koin: " + prefs.getInt("TOTAL_KOIN", 0));
+        tvStreak.setText(prefs.getInt("CURRENT_STREAK", 0) + " Hari");
     }
 }
