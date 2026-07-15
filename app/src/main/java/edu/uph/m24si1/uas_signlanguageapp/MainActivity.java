@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnToko = findViewById(R.id.btnToko);
         Button btnLeaderboard = findViewById(R.id.btnLeaderboard);
 
-        btnBelajar.setOnClickListener(v -> startActivity(new Intent(this, FlashcardActivity.class)));
+        btnBelajar.setOnClickListener(v -> startActivity(new Intent(this, CategoryActivity.class)));
         btnKuis.setOnClickListener(v -> startActivity(new Intent(this, QuizActivity.class)));
         btnToko.setOnClickListener(v -> startActivity(new Intent(this, StoreActivity.class)));
         btnLeaderboard.setOnClickListener(v -> startActivity(new Intent(this, LeaderboardActivity.class)));
