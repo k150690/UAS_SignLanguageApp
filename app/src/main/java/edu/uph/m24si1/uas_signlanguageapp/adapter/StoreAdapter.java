@@ -1,7 +1,5 @@
 package edu.uph.m24si1.uas_signlanguageapp.adapter;
 
-import static android.os.Build.VERSION_CODES_FULL.R;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+// Di sini alamatnya sudah saya kunci langsung ke proyek UPH kalian!
 import edu.uph.m24si1.uas_signlanguageapp.R;
 import edu.uph.m24si1.uas_signlanguageapp.database.StoreItem;
 import edu.uph.m24si1.uas_signlanguageapp.database.UserInventory;
@@ -18,11 +17,10 @@ import java.util.List;
 
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHolder> {
 
-    private List<StoreItem> storeItemList;
-    private List<UserInventory> userInventoryList;
-    private OnItemClickListener listener;
+    private final List<StoreItem> storeItemList;
+    private final List<UserInventory> userInventoryList;
+    private final OnItemClickListener listener;
 
-    // Interface untuk mendeteksi klik tombol di halaman Activity nanti
     public interface OnItemClickListener {
         void onActionClick(StoreItem item, UserInventory inventory);
     }
@@ -36,7 +34,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
     @NonNull
     @Override
     public StoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_store, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item, parent, false);
         return new StoreViewHolder(view);
     }
 
@@ -44,7 +42,6 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
     public void onBindViewHolder(@NonNull StoreViewHolder holder, int position) {
         StoreItem item = storeItemList.get(position);
 
-        // Cari apakah user sudah memiliki barang ini di inventory-nya
         UserInventory currentInventory = null;
         for (UserInventory inv : userInventoryList) {
             if (inv.itemId == item.itemId) {
@@ -53,26 +50,20 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
             }
         }
 
-        // Tampilkan nama dan tipe barang ke layar
         holder.tvItemName.setText(item.itemName);
-        holder.tvItemType.setText("Tipe: " + item.itemType);
+        holder.tvItemType.setText(item.itemType);
 
-        // LOGIKA TOMBOL TOKO (Kunci dari fitur tokomu)
         if (currentInventory == null || !currentInventory.isOwned) {
-            // Kondisi 1: Belum dibeli
-            holder.btnAction.setText("Beli (" + item.price + ")");
+            holder.btnAction.setText("Beli");
             holder.btnAction.setEnabled(true);
-        } else if (currentInventory.isOwned && !currentInventory.isEquipped) {
-            // Kondisi 2: Sudah dibeli, tapi belum dipakai
+        } else if (!currentInventory.isEquipped) {
             holder.btnAction.setText("Equip");
             holder.btnAction.setEnabled(true);
-        } else if (currentInventory.isEquipped) {
-            // Kondisi 3: Sedang dipakai
+        } else {
             holder.btnAction.setText("Dipakai");
-            holder.btnAction.setEnabled(false); // Tombol mati karena sedang aktif digunakan
+            holder.btnAction.setEnabled(false);
         }
 
-        // Kirim data barang yang diklik ke halaman Activity
         UserInventory finalInventory = currentInventory;
         holder.btnAction.setOnClickListener(v -> listener.onActionClick(item, finalInventory));
     }
