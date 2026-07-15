@@ -10,17 +10,19 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_category);
 
         Button btnAbjad = findViewById(R.id.btnKategoriAbjad);
         Button btnHari = findViewById(R.id.btnKategoriHari);
         Button btnKeluarga = findViewById(R.id.btnKategoriKeluarga);
+        Button btnSapaan = findViewById(R.id.btnKategoriSapaan);
         Button btnBack = findViewById(R.id.btnBackToMenu);
-
 
         btnAbjad.setOnClickListener(v -> bukaFlashcard("ABJAD"));
         btnHari.setOnClickListener(v -> bukaFlashcard("HARI"));
         btnKeluarga.setOnClickListener(v -> bukaFlashcard("KELUARGA"));
+        btnSapaan.setOnClickListener(v -> bukaFlashcard("SAPAAN"));
 
         btnBack.setOnClickListener(v -> finish());
     }
