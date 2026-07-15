@@ -62,7 +62,7 @@ public class StoreActivity extends AppCompatActivity {
             List<StoreItem> items = db.storeDao().getAllStoreItems();
             List<UserInventory> inventory = db.storeDao().getUserInventory();
 
-            // Balikkan data ke UI utama agar layar ter-refresh
+            // Balikkan data ke UI utama agar layar refresh
             runOnUiThread(() -> {
                 storeItemList.clear();
                 storeItemList.addAll(items);
@@ -76,7 +76,7 @@ public class StoreActivity extends AppCompatActivity {
     // Logika ketika user membeli barang
     private void prosesBeliItem(StoreItem item) {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Skenario UAS: Anggap pembelian selalu berhasil & langsung disimpan ke database
+            // Anggap pembelian berhasil
             UserInventory newPurchase = new UserInventory(item.itemId, true, false);
             db.storeDao().buyItem(newPurchase);
 
@@ -90,7 +90,7 @@ public class StoreActivity extends AppCompatActivity {
     // Logika ketika user memasang badge/title ke profil
     private void prosesEquipItem(StoreItem item) {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // 1. Copot dulu title/badge tipe sejenis yang lama agar tidak tabrakan
+            // 1. Copot title/badge
             db.storeDao().unequipAllItemsOfType(item.itemType);
             // 2. Pasang title/badge yang baru dipilih
             db.storeDao().equipItem(item.itemId);

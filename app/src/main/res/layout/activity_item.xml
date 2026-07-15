@@ -3,23 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="18dp"
         android:gravity="center_vertical">
 
-        <!-- Info teks barang (Nama dan Tipe) -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
+
 
             <TextView
                 android:id="@+id/tvItemName"
@@ -27,26 +29,36 @@
                 android:layout_height="wrap_content"
                 android:text="Nama Item"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#333333"/>
+                android:fontFamily="sans-serif-medium"
+                android:textColor="#212529"/>
 
             <TextView
                 android:id="@+id/tvItemType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipe: TITLE"
-                android:textSize="14sp"
-                android:textColor="#666666"
-                android:layout_marginTop="4dp"/>
+                android:text="TITLE"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#495057"
+                android:background="#E9ECEF"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:layout_marginTop="6dp"/>
         </LinearLayout>
 
-        <!-- Tombol Aksi (Beli / Equip / Dipakai) -->
         <Button
             android:id="@+id/btnAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beli (200)"
-            android:textSize="14sp"/>
+            android:text="Beli"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#0d6efd"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="20dp"
+            android:paddingHorizontal="20dp"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

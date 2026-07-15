@@ -7,12 +7,11 @@ import androidx.room.PrimaryKey;
 public class UserInventory {
 
     @PrimaryKey
-    public int itemId; // Disamakan dengan itemId dari StoreItem di atas
+    public int itemId;
 
-    public boolean isOwned;    // true = sudah dibeli, false = belum punya
-    public boolean isEquipped; // true = sedang dipasang di profil, false = tidak dipakai
+    public boolean isOwned;
+    public boolean isEquipped;
 
-    // Konstruktor untuk mencatat status barang user
     public UserInventory(int itemId, boolean isOwned, boolean isEquipped) {
         this.itemId = itemId;
         this.isOwned = isOwned;

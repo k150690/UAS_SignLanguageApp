@@ -32,13 +32,12 @@ public class DatabaseInitializer {
         return database;
     }
 
-    // Di sini kamu bebas menentukan daftar barang apa saja yang mau kamu jual di toko beserta harganya
     private static void populateInitialData(AppDatabase db) {
-        // Contoh memasukkan beberapa TITLE yang kamu jual
+        // Contoh title
         db.storeDao().insertItem(new StoreItem("Isyarat Master", "TITLE", 500));
         db.storeDao().insertItem(new StoreItem("Silent Hero", "TITLE", 300));
 
-        // Contoh memasukkan beberapa BADGE yang kamu jual
+        // Contoh badge
         db.storeDao().insertItem(new StoreItem("Tangan Emas", "BADGE", 1000));
         db.storeDao().insertItem(new StoreItem("Kreator Isyarat", "BADGE", 750));
     }

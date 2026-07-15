@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-// Di sini alamatnya sudah saya kunci langsung ke proyek UPH kalian!
 import edu.uph.m24si1.uas_signlanguageapp.R;
 import edu.uph.m24si1.uas_signlanguageapp.database.StoreItem;
 import edu.uph.m24si1.uas_signlanguageapp.database.UserInventory;
