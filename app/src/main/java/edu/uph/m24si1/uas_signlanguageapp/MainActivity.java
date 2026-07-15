@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
 
         tvUsername.setText(prefs.getString("USERNAME", "User"));
-        tvTitle.setText("Title: " + prefs.getString("EQUIPPED_TITLE", "Pemula"));
-        tvCoins.setText("Koin: " + prefs.getInt("TOTAL_KOIN", 0));
+        tvTitle.setText(prefs.getString("EQUIPPED_TITLE", "Pemula"));
+        tvCoins.setText(String.valueOf(prefs.getInt("TOTAL_KOIN", 0))); // Menghapus kata "Koin:"
         tvStreak.setText(prefs.getInt("CURRENT_STREAK", 0) + " Hari");
     }
 }
