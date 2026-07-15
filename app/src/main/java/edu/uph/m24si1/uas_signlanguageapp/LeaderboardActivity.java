@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class LeaderboardActivity extends AppCompatActivity {
 
-    class Player implements Comparable<Player> {
+    static class Player implements Comparable<Player> {
         String name;
         int score;
         String title;
