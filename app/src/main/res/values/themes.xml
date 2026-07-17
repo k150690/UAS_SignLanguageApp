@@ -6,7 +6,4 @@
     </style>
 
     <style name="Theme.UAS_SignLanguageApp" parent="Base.Theme.UAS_SignLanguageApp" />
-    <style name="RoundedImage" parent="">
-        <item name="cornerSize">50%</item>
-    </style>
 </resources>

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         tvCoins.setText(String.valueOf(prefs.getInt("TOTAL_KOIN", 0)));
         tvStreak.setText(prefs.getInt("CURRENT_STREAK", 0) + " Hari");
 
-        String savedUriStr = prefs.getString("PROFILE_URI", null);
+        String savedUriStr = prefs.getString("PROFILE_IMAGE_URI", null);
         if (savedUriStr != null) {
             try {
                 imgAvatar.setImageURI(Uri.parse(savedUriStr));
