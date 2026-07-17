@@ -12,13 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UAS_SignLanguageApp">
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".FlashcardActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -28,11 +31,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LeaderboardActivity"
+            android:name=".StoreActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".FlashcardActivity"
+            android:name=".EditProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
@@ -40,7 +43,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".StoreActivity"
+            android:name=".LeaderboardActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity

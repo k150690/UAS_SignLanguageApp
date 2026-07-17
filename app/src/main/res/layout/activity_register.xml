@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_login"
+    android:id="@+id/main_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Login">
+    tools:context=".Register">
 
     <View
-        android:id="@+id/headerBackground"
+        android:id="@+id/headerBackgroundRegister"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/bg_lg"
@@ -18,36 +18,51 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/headerIllustration"
+        android:id="@+id/headerIllustrationRegister"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/header"
-        app:layout_constraintBottom_toBottomOf="@+id/headerBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/headerBackgroundRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
-        android:id="@+id/loginText"
+        android:id="@+id/registerTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="LOGIN"
+        android:text="REGISTER"
         android:textColor="@color/blue"
-        android:textSize="28dp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerBackground" />
+        app:layout_constraintTop_toBottomOf="@+id/headerBackgroundRegister" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/registerName"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/blue"
+        android:drawablePadding="12dp"
+        android:hint="Full Name"
+        android:inputType="textPersonName"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerTextTitle" />
+
+    <EditText
+        android:id="@+id/registerEmail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/blue"
         android:drawablePadding="12dp"
         android:hint="Email"
@@ -57,10 +72,27 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginText" />
+        app:layout_constraintTop_toBottomOf="@+id/registerName" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/registerPhone"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/blue"
+        android:drawablePadding="12dp"
+        android:hint="Mobile Number"
+        android:inputType="phone"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
+
+    <EditText
+        android:id="@+id/registerPassword"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="24dp"
@@ -74,43 +106,31 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
-
-    <TextView
-        android:id="@+id/forgotPasswordText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        android:text="Forgot your password?"
-        android:textColor="@color/blue"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPhone" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="@color/bblue"
-        android:text="LOGIN"
-        android:textColor="@color/blue"
+        android:backgroundTint="@color/blue"
+        android:text="SIGN UP"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordText" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
 
     <TextView
-        android:id="@+id/signupText"
+        android:id="@+id/loginTextLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:padding="8dp"
-        android:text="Don't have an account? Sign up"
+        android:text="Already have an account? Sign in"
         android:textColor="@color/blue"
         android:textSize="14sp"
         android:textAlignment="center"
