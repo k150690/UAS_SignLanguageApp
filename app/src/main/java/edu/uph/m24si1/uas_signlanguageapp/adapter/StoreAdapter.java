@@ -43,6 +43,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
 
         UserInventory currentInventory = null;
         for (UserInventory inv : userInventoryList) {
+            // Note: Jika di Room kelompokmu itemId adalah String, ganti '==' jadi '.equals(item.itemId)'
             if (inv.itemId == item.itemId) {
                 currentInventory = inv;
                 break;
@@ -51,6 +52,15 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
 
         holder.tvItemName.setText(item.itemName);
         holder.tvItemType.setText(item.itemType);
+
+        // ====================================================================
+        // LOGIKA KUSTOMISASI BARU: Sembunyikan gambar jika TITLE, munculkan jika FRAME
+        // ====================================================================
+        if (item.itemType != null && item.itemType.equalsIgnoreCase("TITLE")) {
+            holder.imgItemIcon.setVisibility(View.GONE); // Gambar hilang total, teks mepet ke kiri
+        } else {
+            holder.imgItemIcon.setVisibility(View.VISIBLE); // Gambar muncul normal untuk tipe FRAME
+        }
 
         if (currentInventory == null || !currentInventory.isOwned) {
             holder.btnAction.setText("Beli");
@@ -75,12 +85,14 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
     public static class StoreViewHolder extends RecyclerView.ViewHolder {
         TextView tvItemName, tvItemType;
         Button btnAction;
+        View imgItemIcon; // TAMBAHAN: Variabel untuk komponen gambar ikon
 
         public StoreViewHolder(@NonNull View itemView) {
             super(itemView);
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemType = itemView.findViewById(R.id.tvItemType);
             btnAction = itemView.findViewById(R.id.btnAction);
+            imgItemIcon = itemView.findViewById(R.id.imgItemIcon); // TAMBAHAN: Hubungkan ke ID XML
         }
     }
 }

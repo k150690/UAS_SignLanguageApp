@@ -27,18 +27,21 @@ public class DatabaseInitializer {
                             });
                         }
                     })
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return database;
     }
 
     private static void populateInitialData(AppDatabase db) {
-        // Contoh title
+        if (db == null) return;
+
+        // KEMBALI JADI 3 PARAMETER (Biar gak merah lagi)
         db.storeDao().insertItem(new StoreItem("Isyarat Master", "TITLE", 500));
         db.storeDao().insertItem(new StoreItem("Silent Hero", "TITLE", 300));
 
-        // Contoh badge
-        db.storeDao().insertItem(new StoreItem("Tangan Emas", "BADGE", 1000));
-        db.storeDao().insertItem(new StoreItem("Kreator Isyarat", "BADGE", 750));
+        // Contoh frame (Isinya 3 parameter: nama, tipe FRAME, dan harga)
+        db.storeDao().insertItem(new StoreItem("Frame Tangan Emas", "FRAME", 1000));
+        db.storeDao().insertItem(new StoreItem("Frame Kreator Isyarat", "FRAME", 750));
     }
 }

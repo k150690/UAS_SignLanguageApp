@@ -1,6 +1,9 @@
 package edu.uph.m24si1.uas_signlanguageapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,19 +28,53 @@ public class StoreActivity extends AppCompatActivity {
     private List<StoreItem> storeItemList = new ArrayList<>();
     private List<UserInventory> userInventoryList = new ArrayList<>();
 
+    // 1. TAMBAHAN: Variabel global untuk Tab Kategori
+    private Button btnTabTitle, btnTabFrame;
+    private String kategoriAktif = "TITLE"; // Default awal menampilkan TITLE
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-        // 1. Inisialisasi Database Room
+        // Inisialisasi Database Room
         db = DatabaseInitializer.getDatabase(this);
 
-        // 2. Hubungkan RecyclerView dengan layout XML
+        // Hubungkan RecyclerView dengan layout XML
         rvStoreItems = findViewById(R.id.rvStoreItems);
         rvStoreItems.setLayoutManager(new LinearLayoutManager(this));
 
-        // 3. Pasang Adapter ke RecyclerView beserta Logika Klik Tombolnya
+        // 2. TAMBAHAN: Hubungkan variabel tombol tab dengan ID di XML
+        btnTabTitle = findViewById(R.id.btnTabTitle);
+        btnTabFrame = findViewById(R.id.btnTabFrame);
+
+        // 3. TAMBAHAN: Logika ketika Tab Title ditekan
+        btnTabTitle.setOnClickListener(v -> {
+            kategoriAktif = "TITLE";
+            // Ubah tombol Title jadi Biru (Aktif), tombol Frame jadi Cream (Tidak Aktif)
+            btnTabTitle.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.blue)));
+            btnTabTitle.setTextColor(getResources().getColor(R.color.white));
+
+            btnTabFrame.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.cream)));
+            btnTabFrame.setTextColor(getResources().getColor(R.color.blue));
+
+            loadDataDariDatabase(); // Refresh list agar data ter-filter
+        });
+
+        // 4. TAMBAHAN: Logika ketika Tab Frame ditekan
+        btnTabFrame.setOnClickListener(v -> {
+            kategoriAktif = "FRAME";
+            // Ubah tombol Frame jadi Biru (Aktif), tombol Title jadi Cream (Tidak Aktif)
+            btnTabFrame.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.blue)));
+            btnTabFrame.setTextColor(getResources().getColor(R.color.white));
+
+            btnTabTitle.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.cream)));
+            btnTabTitle.setTextColor(getResources().getColor(R.color.blue));
+
+            loadDataDariDatabase(); // Refresh list agar data ter-filter
+        });
+
+        // Pasang Adapter ke RecyclerView beserta Logika Klik Tombolnya
         adapter = new StoreAdapter(storeItemList, userInventoryList, new StoreAdapter.OnItemClickListener() {
             @Override
             public void onActionClick(StoreItem item, UserInventory inventory) {
@@ -52,23 +89,41 @@ public class StoreActivity extends AppCompatActivity {
         });
         rvStoreItems.setAdapter(adapter);
 
-        // 4. Ambil data dari database untuk ditampilkan ke layar
+        // Ambil data dari database untuk ditampilkan ke layar
         loadDataDariDatabase();
     }
 
-    // Fungsi untuk mengambil data terbaru dari database
     private void loadDataDariDatabase() {
         Executors.newSingleThreadExecutor().execute(() -> {
+            // Mengambil semua data asli dari Room Database kelompokmu
             List<StoreItem> items = db.storeDao().getAllStoreItems();
             List<UserInventory> inventory = db.storeDao().getUserInventory();
 
-            // Balikkan data ke UI utama agar layar refresh
+            // Saring murni menggunakan kategori data Room yang aktif
+            List<StoreItem> filteredItems = new ArrayList<>();
+            if (items != null) {
+                for (StoreItem item : items) {
+                    if (item.itemType != null && item.itemType.equalsIgnoreCase(kategoriAktif)) {
+                        filteredItems.add(item);
+                    }
+                }
+            }
+
             runOnUiThread(() -> {
                 storeItemList.clear();
-                storeItemList.addAll(items);
+                storeItemList.addAll(filteredItems);
                 userInventoryList.clear();
-                userInventoryList.addAll(inventory);
+                if (inventory != null) {
+                    userInventoryList.addAll(inventory);
+                }
                 adapter.notifyDataSetChanged();
+
+                // Update saldo koin dari SharedPreferences di UI
+                SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
+                TextView tvStoreCoins = findViewById(R.id.tvStoreCoins);
+                if (tvStoreCoins != null) {
+                    tvStoreCoins.setText(String.valueOf(prefs.getInt("TOTAL_KOIN", 0)));
+                }
             });
         });
     }
