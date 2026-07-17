@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class Register extends AppCompatActivity {
     EditText name, email, phone, password;
@@ -25,12 +22,6 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_register), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         name = findViewById(R.id.registerName);
         email = findViewById(R.id.registerEmail);
@@ -64,7 +55,7 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                // Proses simpan password dan nama sekaligus ke SharedPreferences
+                //simpan password dan nama sekaligus ke SharedPreferences
                 SharedPreferences.Editor editor = userPrefs.edit();
                 editor.putString(inputEmail, inputPass);
                 editor.putString(inputEmail + "_name", inputName); // Menyimpan nama dengan key email+_name

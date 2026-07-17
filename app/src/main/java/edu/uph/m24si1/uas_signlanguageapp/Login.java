@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class Login extends AppCompatActivity {
     EditText username, password;
@@ -26,19 +23,13 @@ public class Login extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_login), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
         signupText = findViewById(R.id.signupText);
         forgotPasswordText = findViewById(R.id.forgotPasswordText);
 
-        // SharedPreferences untuk mengecek data registrasi
+        //SharedPreferences untuk mengecek data registrasi
         SharedPreferences userPrefs = getSharedPreferences("SignTeachUserPrefs", MODE_PRIVATE);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -52,16 +43,16 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                // Ambil password yang cocok dengan email input
+                //ambil password yang cocok dengan email input
                 String storedPass = userPrefs.getString(inputUser, null);
 
                 if (storedPass != null && storedPass.equals(inputPass)) {
                     Toast.makeText(Login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-                    // Mengambil nama asli user yang terdaftar berdasarkan email
+                    //ambil nama asli user yang terdaftar berdasarkan email
                     String registeredName = userPrefs.getString(inputUser + "_name", "User");
 
-                    // Menyimpan NAMA USER ke key "USERNAME" agar dibaca oleh MainActivity
+                    //simpan NAMA USER ke key "USERNAME" agar dibaca oleh MainActivity
                     getSharedPreferences("SignTeachPrefs", MODE_PRIVATE)
                             .edit()
                             .putString("USERNAME", registeredName)
