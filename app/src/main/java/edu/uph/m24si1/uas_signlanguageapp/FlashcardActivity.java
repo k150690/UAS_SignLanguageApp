@@ -24,24 +24,21 @@ public class FlashcardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
 
-        // 1. Hubungkan variabel dengan ID di XML
         imgSign = findViewById(R.id.imgSign);
         tvLabel = findViewById(R.id.tvLabel);
         tvProgress = findViewById(R.id.tvProgress);
         btnPrev = findViewById(R.id.btnPrev);
         btnNext = findViewById(R.id.btnNext);
 
-        // 2. Tangkap sinyal Kategori dari Intent (Stasiun Transit)
+
         kategoriAktif = getIntent().getStringExtra("KATEGORI_PILIHAN");
 
-        // Validasi keamanan: Jika lolos tanpa kategori (null), tutup paksa Activity
         if (kategoriAktif == null) {
             Toast.makeText(this, "Akses Ilegal: Kategori tidak ditemukan.", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        // 3. Susun data berdasarkan kategori
         inisialisasiData(kategoriAktif);
 
         if (materiList.isEmpty()) {
@@ -52,7 +49,6 @@ public class FlashcardActivity extends AppCompatActivity {
 
         tampilkanMateri();
 
-        // 4. Logika Tombol Navigasi
         btnPrev.setOnClickListener(v -> {
             if (currentIndex > 0) {
                 currentIndex--;

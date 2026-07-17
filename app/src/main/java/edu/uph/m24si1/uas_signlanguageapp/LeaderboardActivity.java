@@ -33,24 +33,20 @@ public class LeaderboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard);
         TextView tvRankingBox = findViewById(R.id.tvRankingBox);
 
-        // Array NPC Kompetitor
         ArrayList<Player> players = new ArrayList<>();
         players.add(new Player("Anastasia Willim", 180, "Pakar Isyarat"));
         players.add(new Player("Vivien", 140, "Silent Speaker"));
         players.add(new Player("Andi Wijaya", 90, "Isyarat Newbie"));
         players.add(new Player("Roni Skena", 40, "Masih Pemula"));
 
-        // Tarik data asli menggunakan kunci yang SAMA dengan MainActivity
         SharedPreferences sharedPref = getSharedPreferences("SignTeachPrefs", Context.MODE_PRIVATE);
         String namaAku = sharedPref.getString("USERNAME", "User");
         String titleAku = sharedPref.getString("EQUIPPED_TITLE", "Pemula");
         int koinAku = sharedPref.getInt("TOTAL_KOIN", 0);
 
-        // Masukkan data asli ke arena, lalu urutkan
         players.add(new Player(namaAku + " (Kamu)", koinAku, titleAku));
         Collections.sort(players);
 
-        // Cetak hasil yang sudah diurutkan ke layar
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < players.size(); i++) {
             Player p = players.get(i);

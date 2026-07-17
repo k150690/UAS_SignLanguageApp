@@ -30,8 +30,19 @@ public class MainActivity extends AppCompatActivity {
         Button btnLeaderboard = findViewById(R.id.btnLeaderboard);
 
         imgAvatar.setOnClickListener(v -> startActivity(new Intent(this, EditProfileActivity.class)));
-        btnBelajar.setOnClickListener(v -> startActivity(new Intent(this, CategoryActivity.class)));
-        btnKuis.setOnClickListener(v -> startActivity(new Intent(this, QuizActivity.class)));
+
+        btnBelajar.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CategoryActivity.class);
+            intent.putExtra("TUJUAN_ACTIVITY", "FLASHCARD");
+            startActivity(intent);
+        });
+
+        btnKuis.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CategoryActivity.class);
+            intent.putExtra("TUJUAN_ACTIVITY", "KUIS");
+            startActivity(intent);
+        });
+
         btnToko.setOnClickListener(v -> startActivity(new Intent(this, StoreActivity.class)));
         btnLeaderboard.setOnClickListener(v -> startActivity(new Intent(this, LeaderboardActivity.class)));
     }
