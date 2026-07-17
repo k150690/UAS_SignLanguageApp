@@ -1,5 +1,6 @@
 package edu.uph.m24si1.uas_signlanguageapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,8 +35,18 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.getText().toString().equals("user") && password.getText().toString().equals("1234")) {
+                String inputUser = username.getText().toString();
+                String inputPass = password.getText().toString();
+
+                if (inputUser.equals("user") && inputPass.equals("1234")) {
                     Toast.makeText(Login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+
+                    android.content.SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
+                    prefs.edit().putString("USERNAME", inputUser).apply();
+
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(Login.this, "Login Failed!", Toast.LENGTH_SHORT).show();
                 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/blue"> <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@color/blue"
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imgAvatar"
@@ -25,75 +25,79 @@
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:layout_marginTop="12dp"/> <TextView
-    android:id="@+id/tvTitle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="NPC berbakat"
-    android:textColor="@color/cream"
-    android:textSize="16sp"
-    android:textStyle="italic"
-    android:layout_marginBottom="24dp"/> <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white"
-    android:padding="16dp"
-    android:layout_marginBottom="32dp">
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NPC"
+        android:textColor="@color/cream"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_marginBottom="24dp"/>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="💰 Koin"
-            android:textColor="@color/blue"
-            android:textSize="14sp"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/tvCoins"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💰 Koin"
+                android:textColor="@color/blue"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tvCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80"
+                android:textColor="@color/blue"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/bblue"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="80"
-            android:textColor="@color/blue"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔥 Streak"
+                android:textColor="@color/blue"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tvStreak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 Hari"
+                android:textColor="@color/brown"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
     </LinearLayout>
-
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/bblue"/>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🔥 Streak"
-            android:textColor="@color/blue"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tvStreak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3 Hari"
-            android:textColor="@color/brown"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-</LinearLayout>
 
     <Button
         android:id="@+id/btnBelajar"
@@ -102,14 +106,16 @@
         android:text="Mulai Belajar"
         android:textColor="@color/blue"
         android:backgroundTint="@color/cream"
-        android:layout_marginBottom="12dp"/> <Button
-    android:id="@+id/btnKuis"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:text="Main Kuis"
-    android:textColor="@color/blue"
-    android:backgroundTint="@color/bblue"
-    android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btnKuis"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Main Kuis"
+        android:textColor="@color/blue"
+        android:backgroundTint="@color/bblue"
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btnToko"
@@ -129,4 +135,3 @@
         android:backgroundTint="@color/blush"/>
 
 </LinearLayout>
-</ScrollView>
