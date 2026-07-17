@@ -14,7 +14,6 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        // Menangkap status apakah user ingin Belajar atau Kuis dari MainActivity
         tujuanActivity = getIntent().getStringExtra("TUJUAN_ACTIVITY");
         if (tujuanActivity == null) {
             tujuanActivity = "FLASHCARD"; // Fallback aman
@@ -36,8 +35,6 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void eksekusiNavigasi(String kategori) {
         Intent intent;
-
-        // Membelah rute perjalanan berdasarkan tombol yang ditekan di menu utama
         if (tujuanActivity.equals("KUIS")) {
             intent = new Intent(this, QuizActivity.class);
         } else {
