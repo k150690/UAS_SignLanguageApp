@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class EditProfileActivity extends AppCompatActivity {
     private EditText edtEditUsername;
-    private Button btnSimpanProfile, btnBatalProfile;
+    private Button btnSimpanProfile, btnBatalProfile, btnLogout;
     private ImageView imgAvatarEdit;
     private Uri selectedImageUri = null;
 
@@ -53,6 +53,7 @@ public class EditProfileActivity extends AppCompatActivity {
         edtEditUsername = findViewById(R.id.edtEditUsername);
         btnSimpanProfile = findViewById(R.id.btnSimpanProfile);
         btnBatalProfile = findViewById(R.id.btnBatalProfile);
+        btnLogout = findViewById(R.id.btnLogout);
         imgAvatarEdit = findViewById(R.id.imgAvatarEdit);
 
         SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
@@ -94,5 +95,27 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         btnBatalProfile.setOnClickListener(v -> finish());
+
+        btnLogout.setOnClickListener(v -> {
+            new androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle("Logout") .setMessage("Apakah anda yakin ingin keluar dari akun?")
+                    .setPositiveButton("Ya", (dialog, which) -> {
+                        // logout
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.remove("USERNAME");
+                        editor.apply();
+                        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(EditProfileActivity.this, Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    })
+                    .setNegativeButton("Tidak", (dialog, which) -> {
+                        // gajadi
+                        dialog.dismiss();
+                    })
+                    .show(); //popup
+        });
     }
 }
