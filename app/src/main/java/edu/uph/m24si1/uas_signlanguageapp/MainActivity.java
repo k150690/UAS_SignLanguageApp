@@ -2,6 +2,7 @@ package edu.uph.m24si1.uas_signlanguageapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -44,5 +45,15 @@ public class MainActivity extends AppCompatActivity {
         tvTitle.setText(prefs.getString("EQUIPPED_TITLE", "Pemula"));
         tvCoins.setText(String.valueOf(prefs.getInt("TOTAL_KOIN", 0)));
         tvStreak.setText(prefs.getInt("CURRENT_STREAK", 0) + " Hari");
+
+        String savedUriStr = prefs.getString("PROFILE_IMAGE_URI", null);
+        if (savedUriStr != null) {
+            try {
+                Uri savedUri = Uri.parse(savedUriStr);
+                imgAvatar.setImageURI(savedUri);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

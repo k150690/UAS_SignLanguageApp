@@ -40,7 +40,61 @@
                 android:textStyle="bold"
                 android:textColor="@color/blue"
                 android:textAlignment="center"
-                android:layout_marginBottom="28dp"/>
+                android:layout_marginBottom="20dp"/>
+
+            <!-- FrameLayout yang menampung Foto Bulat + Ikon Kamera -->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp">
+
+                <!-- CardView Bulat untuk memotong Foto Profil Baru -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+
+                    <ImageView
+                        android:id="@+id/imgAvatarEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/header"
+                        android:scaleType="centerCrop"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Latar belakang lingkaran kecil untuk ikon kamera -->
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="bottom|end"
+                    android:background="@android:drawable/presence_online"
+                    android:backgroundTint="@color/blue" />
+
+                <!-- Ikon Kamera Kecil -->
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="6dp"
+                    android:src="@android:drawable/ic_menu_camera"
+                    app:tint="@color/white" />
+            </FrameLayout>
+
+            <!-- Teks Petunjuk Tambahan di bawah foto -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ketuk foto untuk mengubah"
+                android:textSize="12sp"
+                android:textColor="@color/blue"
+                android:textAlignment="center"
+                android:layout_marginBottom="20dp"
+                android:textStyle="italic" />
 
             <EditText
                 android:id="@+id/edtEditUsername"
