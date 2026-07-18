@@ -23,9 +23,9 @@ public class DatabaseInitializer {
                     defaultItems.add(new StoreItem("title_1", "Pemula", "TITLE", 0));
                     defaultItems.add(new StoreItem("title_2", "NPC Berbakat", "TITLE", 50));
                     defaultItems.add(new StoreItem("title_3", "Pro Player", "TITLE", 150));
-                    defaultItems.add(new StoreItem("frame_1", "Frame Dasar", "FRAME", 0));
-                    defaultItems.add(new StoreItem("frame_2", "Frame Emas", "FRAME", 200));
-
+                    defaultItems.add(new StoreItem("title_4", "Pengejar Streak", "TITLE", 100));
+                    defaultItems.add(new StoreItem("title_5", "Pakar Linguistik", "TITLE", 180));
+                    defaultItems.add(new StoreItem("title_6", "Duta Isyarat", "TITLE", 150));
                     instance.storeDao().insertStoreItems(defaultItems);
                 }
             });

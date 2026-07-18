@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:background="#F5F6F9">
 
-    <!-- BAGIAN 1: Header Atas Gelombang -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -66,47 +65,12 @@
             android:textSize="13sp" />
     </LinearLayout>
 
-    <!-- KATEGORI/TAB PILIHAN (2 Kolom Pemula Friendly) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="-40dp"
-        android:weightSum="2">
-
-        <Button
-            android:id="@+id/btnTabTitle"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_marginEnd="6dp"
-            android:text="Title Profil"
-            android:textStyle="bold"
-            android:backgroundTint="@color/blue"
-            android:textColor="@color/white"
-            app:cornerRadius="12dp" />
-
-        <Button
-            android:id="@+id/btnTabFrame"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_marginStart="6dp"
-            android:text="Frame Profil"
-            android:textStyle="bold"
-            android:backgroundTint="@color/cream"
-            android:textColor="@color/blue"
-            app:cornerRadius="12dp" />
-    </LinearLayout>
-
-    <!-- BAGIAN 3: Daftar Barang Toko -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStoreItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="-30dp"
         tools:listitem="@layout/activity_item" />
 
 </LinearLayout>
