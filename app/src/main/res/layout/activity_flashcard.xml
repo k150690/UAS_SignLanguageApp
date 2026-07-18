@@ -23,13 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
         android:layout_marginBottom="24dp">
+
 
         <ImageView
             android:id="@+id/imgSign"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
             android:scaleType="centerInside" />
     </androidx.cardview.widget.CardView>
 
@@ -42,12 +44,13 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="40dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginHorizontal="12dp"
         android:weightSum="2">
 
         <Button
