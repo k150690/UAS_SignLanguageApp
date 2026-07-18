@@ -16,11 +16,11 @@
             android:background="@drawable/bg_lg" />
 
         <ImageView
-            android:id="@+id/headerIllustrationRegister"
+            android:id="@+id/headerIllustration"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/header" />
     </FrameLayout>
 
@@ -88,6 +88,7 @@
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:layout_marginTop="-20dp"
             android:backgroundTint="@color/blue"
             android:text="SIGN UP"
             android:textColor="@color/white"
@@ -105,9 +106,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:layout_marginBottom="25dp"
             android:text="Already have an account? Sign in"
             android:textColor="@color/blue"
             android:textSize="14sp"
+            android:textStyle="bold"
             android:textAlignment="center" />
     </LinearLayout>
 
