@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity {
         signupText = findViewById(R.id.signupText);
         forgotPasswordText = findViewById(R.id.forgotPasswordText);
 
-        //SharedPreferences untuk mengecek data registrasi
         SharedPreferences userPrefs = getSharedPreferences("SignTeachUserPrefs", MODE_PRIVATE);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -43,19 +42,18 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                //ambil password yang cocok dengan email input
                 String storedPass = userPrefs.getString(inputUser, null);
 
                 if (storedPass != null && storedPass.equals(inputPass)) {
                     Toast.makeText(Login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-                    //ambil nama asli user yang terdaftar berdasarkan email
                     String registeredName = userPrefs.getString(inputUser + "_name", "User");
 
-                    //simpan NAMA USER ke key "USERNAME" agar dibaca oleh MainActivity
                     getSharedPreferences("SignTeachPrefs", MODE_PRIVATE)
                             .edit()
-                            .putString("USERNAME", registeredName)
+                            .putString("ACTIVE_EMAIL", inputUser)
+                            .putString("USERNAME_" + inputUser, registeredName)
+                            .putString("USERNAME", registeredName) // Fallback
                             .apply();
 
                     Intent intent = new Intent(Login.this, MainActivity.class);

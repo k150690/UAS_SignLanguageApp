@@ -191,9 +191,10 @@ public class FlashcardActivity extends AppCompatActivity {
 
     private void selesaikanSesi() {
         SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
-        int koinLama = prefs.getInt("TOTAL_KOIN", 0);
+        String activeEmail = prefs.getString("ACTIVE_EMAIL", "default");
 
-        prefs.edit().putInt("TOTAL_KOIN", koinLama + 10).apply();
+        int koinLama = prefs.getInt("TOTAL_KOIN_" + activeEmail, 0);
+        prefs.edit().putInt("TOTAL_KOIN_" + activeEmail, koinLama + 10).apply();
 
         Toast.makeText(this, "Sesi Selesai! +10 Koin", Toast.LENGTH_SHORT).show();
         finish();

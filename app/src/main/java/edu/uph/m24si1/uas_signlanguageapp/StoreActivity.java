@@ -28,78 +28,63 @@ public class StoreActivity extends AppCompatActivity {
     private List<StoreItem> storeItemList = new ArrayList<>();
     private List<UserInventory> userInventoryList = new ArrayList<>();
 
-    // 1. TAMBAHAN: Variabel global untuk Tab Kategori
     private Button btnTabTitle, btnTabFrame;
-    private String kategoriAktif = "TITLE"; // Default awal menampilkan TITLE
+    private String kategoriAktif = "TITLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-        // Inisialisasi Database Room
         db = DatabaseInitializer.getDatabase(this);
 
-        // Hubungkan RecyclerView dengan layout XML
         rvStoreItems = findViewById(R.id.rvStoreItems);
         rvStoreItems.setLayoutManager(new LinearLayoutManager(this));
 
-        // 2. TAMBAHAN: Hubungkan variabel tombol tab dengan ID di XML
         btnTabTitle = findViewById(R.id.btnTabTitle);
         btnTabFrame = findViewById(R.id.btnTabFrame);
 
-        // 3. TAMBAHAN: Logika ketika Tab Title ditekan
         btnTabTitle.setOnClickListener(v -> {
             kategoriAktif = "TITLE";
-            // Ubah tombol Title jadi Biru (Aktif), tombol Frame jadi Cream (Tidak Aktif)
             btnTabTitle.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.blue)));
             btnTabTitle.setTextColor(getResources().getColor(R.color.white));
-
             btnTabFrame.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.cream)));
             btnTabFrame.setTextColor(getResources().getColor(R.color.blue));
-
-            loadDataDariDatabase(); // Refresh list agar data ter-filter
+            loadDataDariDatabase();
         });
 
-        // 4. TAMBAHAN: Logika ketika Tab Frame ditekan
         btnTabFrame.setOnClickListener(v -> {
             kategoriAktif = "FRAME";
-            // Ubah tombol Frame jadi Biru (Aktif), tombol Title jadi Cream (Tidak Aktif)
             btnTabFrame.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.blue)));
             btnTabFrame.setTextColor(getResources().getColor(R.color.white));
-
             btnTabTitle.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.cream)));
             btnTabTitle.setTextColor(getResources().getColor(R.color.blue));
-
-            loadDataDariDatabase(); // Refresh list agar data ter-filter
+            loadDataDariDatabase();
         });
 
-        // Pasang Adapter ke RecyclerView beserta Logika Klik Tombolnya
         adapter = new StoreAdapter(storeItemList, userInventoryList, new StoreAdapter.OnItemClickListener() {
             @Override
             public void onActionClick(StoreItem item, UserInventory inventory) {
                 if (inventory == null || !inventory.isOwned) {
-                    // KONDISI: User menekan tombol BELI
                     prosesBeliItem(item);
                 } else if (!inventory.isEquipped) {
-                    // KONDISI: User menekan tombol EQUIP
                     prosesEquipItem(item);
                 }
             }
         });
         rvStoreItems.setAdapter(adapter);
 
-        // Ambil data dari database untuk ditampilkan ke layar
         loadDataDariDatabase();
     }
 
     private void loadDataDariDatabase() {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Mengambil semua data asli dari Room Database kelompokmu
-            List<StoreItem> items = db.storeDao().getAllStoreItems();
-            List<UserInventory> inventory = db.storeDao().getUserInventory();
+            SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
+            String activeEmail = prefs.getString("ACTIVE_EMAIL", "default");
 
-            // Saring murni menggunakan kategori data Room yang aktif
+            List<StoreItem> items = db.storeDao().getAllStoreItems();
+            List<UserInventory> inventory = db.storeDao().getUserInventory(activeEmail); // Memanggil inventory user spesifik
+
             List<StoreItem> filteredItems = new ArrayList<>();
             if (items != null) {
                 for (StoreItem item : items) {
@@ -118,41 +103,62 @@ public class StoreActivity extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
 
-                // Update saldo koin dari SharedPreferences di UI
-                SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
                 TextView tvStoreCoins = findViewById(R.id.tvStoreCoins);
                 if (tvStoreCoins != null) {
-                    tvStoreCoins.setText(String.valueOf(prefs.getInt("TOTAL_KOIN", 0)));
+                    int koinAktual = prefs.getInt("TOTAL_KOIN_" + activeEmail, 0);
+                    tvStoreCoins.setText(String.valueOf(koinAktual));
                 }
             });
         });
     }
 
-    // Logika ketika user membeli barang
     private void prosesBeliItem(StoreItem item) {
+        SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
+        String activeEmail = prefs.getString("ACTIVE_EMAIL", "default");
+
+        int koinSekarang = prefs.getInt("TOTAL_KOIN_" + activeEmail, 0);
+
+        // PERBAIKAN: Tarik harga asli dari properti barang, bukan angka mati 50
+        int hargaBarang = item.itemPrice;
+
+        if (koinSekarang < hargaBarang) {
+            Toast.makeText(this, "Koin tidak cukup! Butuh " + hargaBarang + " koin.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int sisaKoin = koinSekarang - hargaBarang;
+        prefs.edit().putInt("TOTAL_KOIN_" + activeEmail, sisaKoin).apply();
+
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Anggap pembelian berhasil
-            UserInventory newPurchase = new UserInventory(item.itemId, true, false);
+            UserInventory newPurchase = new UserInventory(item.itemId, activeEmail, true, false);
             db.storeDao().buyItem(newPurchase);
 
             runOnUiThread(() -> {
                 Toast.makeText(StoreActivity.this, "Berhasil membeli: " + item.itemName, Toast.LENGTH_SHORT).show();
-                loadDataDariDatabase(); // Refresh tampilan toko
+                loadDataDariDatabase();
             });
         });
     }
 
-    // Logika ketika user memasang badge/title ke profil
     private void prosesEquipItem(StoreItem item) {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // 1. Copot title/badge
-            db.storeDao().unequipAllItemsOfType(item.itemType);
-            // 2. Pasang title/badge yang baru dipilih
-            db.storeDao().equipItem(item.itemId);
+            SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
+            String activeEmail = prefs.getString("ACTIVE_EMAIL", "default");
+
+            db.storeDao().unequipAllItemsOfType(item.itemType, activeEmail);
+            db.storeDao().equipItem(item.itemId, activeEmail);
+
+            SharedPreferences.Editor editor = prefs.edit();
+            if (item.itemType.equalsIgnoreCase("TITLE")) {
+                editor.putString("EQUIPPED_TITLE_" + activeEmail, item.itemName);
+            } else if (item.itemType.equalsIgnoreCase("FRAME")) {
+                editor.putString("EQUIPPED_FRAME_" + activeEmail, item.itemId);
+            }
+            editor.apply();
 
             runOnUiThread(() -> {
                 Toast.makeText(StoreActivity.this, item.itemName + " berhasil di-equip!", Toast.LENGTH_SHORT).show();
-                loadDataDariDatabase(); // Refresh tampilan toko
+                loadDataDariDatabase();
             });
         });
     }

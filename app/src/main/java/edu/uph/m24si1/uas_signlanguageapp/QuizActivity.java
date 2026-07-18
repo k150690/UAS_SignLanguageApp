@@ -203,9 +203,12 @@ public class QuizActivity extends AppCompatActivity {
 
     private void selesaikanKuis() {
         SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
-        int koinLama = prefs.getInt("TOTAL_KOIN", 0);
 
-        prefs.edit().putInt("TOTAL_KOIN", koinLama + skorTotal).apply();
+        String activeEmail = prefs.getString("ACTIVE_EMAIL", "default");
+
+        int koinLama = prefs.getInt("TOTAL_KOIN_" + activeEmail, 0);
+
+        prefs.edit().putInt("TOTAL_KOIN_" + activeEmail, koinLama + skorTotal).apply();
 
         Toast.makeText(this, "Kuis Selesai! Total koin yang didapat: " + skorTotal, Toast.LENGTH_LONG).show();
         finish();

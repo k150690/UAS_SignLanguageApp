@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private TextView tvUsername, tvTitle, tvCoins, tvStreak;
     private ImageView imgAvatar;
+    private ImageView imgFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         tvCoins = findViewById(R.id.tvCoins);
         tvStreak = findViewById(R.id.tvStreak);
         imgAvatar = findViewById(R.id.imgAvatar);
+
 
         Button btnBelajar = findViewById(R.id.btnBelajar);
         Button btnKuis = findViewById(R.id.btnKuis);
@@ -52,17 +54,31 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
 
-        tvUsername.setText(prefs.getString("USERNAME", "User"));
-        tvTitle.setText(prefs.getString("EQUIPPED_TITLE", "Pemula"));
-        tvCoins.setText(String.valueOf(prefs.getInt("TOTAL_KOIN", 0)));
-        tvStreak.setText(prefs.getInt("CURRENT_STREAK", 0) + " Hari");
+        String activeEmail = prefs.getString("ACTIVE_EMAIL", "default");
 
-        String savedUriStr = prefs.getString("PROFILE_IMAGE_URI", null);
+        tvUsername.setText(prefs.getString("USERNAME_" + activeEmail, prefs.getString("USERNAME", "User")));
+        tvTitle.setText(prefs.getString("EQUIPPED_TITLE_" + activeEmail, "Pemula"));
+        tvCoins.setText(String.valueOf(prefs.getInt("TOTAL_KOIN_" + activeEmail, 0)));
+        tvStreak.setText(prefs.getInt("CURRENT_STREAK_" + activeEmail, 0) + " Hari");
+
+        String savedUriStr = prefs.getString("PROFILE_IMAGE_URI_" + activeEmail, null);
         if (savedUriStr != null) {
             try {
                 imgAvatar.setImageURI(Uri.parse(savedUriStr));
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+
+        if (imgFrame != null) {
+            String equippedFrameId = prefs.getString("EQUIPPED_FRAME_" + activeEmail, "default");
+
+            if (equippedFrameId.equals("frame_1")) {
+                imgFrame.setImageResource(R.drawable.frame_dasar);
+            } else if (equippedFrameId.equals("frame_2")) {
+                imgFrame.setImageResource(R.drawable.frame_dasar);
+            } else {
+                imgFrame.setImageResource(android.R.color.transparent);
             }
         }
     }

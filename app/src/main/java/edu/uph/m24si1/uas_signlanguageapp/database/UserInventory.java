@@ -1,19 +1,22 @@
 package edu.uph.m24si1.uas_signlanguageapp.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "user_inventory")
+@Entity(tableName = "user_inventory", primaryKeys = {"itemId", "ownerEmail"})
 public class UserInventory {
+    @NonNull
+    public String itemId;
 
-    @PrimaryKey
-    public int itemId;
+    @NonNull
+    public String ownerEmail;
 
     public boolean isOwned;
     public boolean isEquipped;
 
-    public UserInventory(int itemId, boolean isOwned, boolean isEquipped) {
+    public UserInventory(@NonNull String itemId, @NonNull String ownerEmail, boolean isOwned, boolean isEquipped) {
         this.itemId = itemId;
+        this.ownerEmail = ownerEmail;
         this.isOwned = isOwned;
         this.isEquipped = isEquipped;
     }

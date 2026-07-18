@@ -55,15 +55,22 @@ public class Register extends AppCompatActivity {
                     return;
                 }
 
-                //simpan password dan nama sekaligus ke SharedPreferences
                 SharedPreferences.Editor editor = userPrefs.edit();
                 editor.putString(inputEmail, inputPass);
-                editor.putString(inputEmail + "_name", inputName); // Menyimpan nama dengan key email+_name
+                editor.putString(inputEmail + "_name", inputName);
                 editor.apply();
+
+                getSharedPreferences("SignTeachPrefs", MODE_PRIVATE)
+                        .edit()
+                        .putString("ACTIVE_EMAIL", inputEmail)
+                        .putString("USERNAME_" + inputEmail, inputName)
+                        .putString("USERNAME", inputName) // Fallback
+                        .apply();
 
                 Toast.makeText(Register.this, "Register Successful!", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(Register.this, Login.class);
+                Intent intent = new Intent(Register.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             }
