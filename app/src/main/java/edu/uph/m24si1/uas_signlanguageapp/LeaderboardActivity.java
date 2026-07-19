@@ -40,9 +40,10 @@ public class LeaderboardActivity extends AppCompatActivity {
         players.add(new Player("Roni Skena", 40, "Masih Pemula"));
 
         SharedPreferences sharedPref = getSharedPreferences("SignTeachPrefs", Context.MODE_PRIVATE);
-        String namaAku = sharedPref.getString("USERNAME", "User");
-        String titleAku = sharedPref.getString("EQUIPPED_TITLE", "Pemula");
-        int koinAku = sharedPref.getInt("TOTAL_KOIN", 0);
+        String activeEmail = sharedPref.getString("ACTIVE_EMAIL", "default");
+        String namaAku = sharedPref.getString("USERNAME_" + activeEmail, sharedPref.getString("USERNAME", "User"));
+        String titleAku = sharedPref.getString("EQUIPPED_TITLE_" + activeEmail, "Pemula");
+        int koinAku = sharedPref.getInt("TOTAL_KOIN_" + activeEmail, 0);
 
         players.add(new Player(namaAku + " (Kamu)", koinAku, titleAku));
         Collections.sort(players);
