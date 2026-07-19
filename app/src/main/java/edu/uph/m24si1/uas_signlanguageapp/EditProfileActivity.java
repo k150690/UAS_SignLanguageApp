@@ -30,7 +30,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     Uri imageUri = result.getData().getData();
                     if (imageUri != null) {
                         getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
                         selectedImageUri = imageUri;
                         imgAvatarEdit.setImageURI(imageUri);
                     }
@@ -57,10 +56,13 @@ public class EditProfileActivity extends AppCompatActivity {
         imgAvatarEdit = findViewById(R.id.imgAvatarEdit);
 
         SharedPreferences prefs = getSharedPreferences("SignTeachPrefs", MODE_PRIVATE);
-        String namaLama = prefs.getString("USERNAME", "User");
+
+        String activeEmail = prefs.getString("ACTIVE_EMAIL", "default");
+
+        String namaLama = prefs.getString("USERNAME_" + activeEmail, prefs.getString("USERNAME", "User"));
         edtEditUsername.setText(namaLama);
 
-        String savedUriStr = prefs.getString("PROFILE_IMAGE_URI", null);
+        String savedUriStr = prefs.getString("PROFILE_IMAGE_URI_" + activeEmail, null);
         if (savedUriStr != null) {
             try {
                 imgAvatarEdit.setImageURI(Uri.parse(savedUriStr));
@@ -83,9 +85,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(this, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show();
             } else {
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("USERNAME", namaBaru);
+                editor.putString("USERNAME_" + activeEmail, namaBaru);
+                editor.putString("USERNAME", namaBaru); // Fallback
+
                 if (selectedImageUri != null) {
-                    editor.putString("PROFILE_IMAGE_URI", selectedImageUri.toString());
+                    editor.putString("PROFILE_IMAGE_URI_" + activeEmail, selectedImageUri.toString());
                 }
 
                 editor.apply();
@@ -100,10 +104,10 @@ public class EditProfileActivity extends AppCompatActivity {
             new androidx.appcompat.app.AlertDialog.Builder(this)
                     .setTitle("Logout") .setMessage("Apakah anda yakin ingin keluar dari akun?")
                     .setPositiveButton("Ya", (dialog, which) -> {
-                        // logout
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.remove("USERNAME");
+                        editor.remove("ACTIVE_EMAIL");
                         editor.apply();
+
                         Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(EditProfileActivity.this, Login.class);
@@ -112,10 +116,9 @@ public class EditProfileActivity extends AppCompatActivity {
                         finish();
                     })
                     .setNegativeButton("Tidak", (dialog, which) -> {
-                        // gajadi
                         dialog.dismiss();
                     })
-                    .show(); //popup
+                    .show();
         });
     }
 }

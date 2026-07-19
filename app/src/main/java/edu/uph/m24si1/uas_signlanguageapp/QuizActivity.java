@@ -186,7 +186,7 @@ public class QuizActivity extends AppCompatActivity {
         QuizItem soalSekarang = daftarSoal.get(currentIndex);
 
         if (jawabanDipilih.equals(soalSekarang.jawabanBenar)) {
-            skorTotal += 10;
+            skorTotal += 3;
             Toast.makeText(this, "Benar! (+10 Koin)", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Salah. Jawaban: " + soalSekarang.jawabanBenar, Toast.LENGTH_SHORT).show();
@@ -195,9 +195,9 @@ public class QuizActivity extends AppCompatActivity {
         currentIndex++;
 
         if (currentIndex < daftarSoal.size()) {
-            tampilkanSoal(); // Panggil soal berikutnya
+            tampilkanSoal();
         } else {
-            selesaikanKuis(); // Akhiri kuis jika soal habis
+            selesaikanKuis();
         }
     }
 

@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private TextView tvUsername, tvTitle, tvCoins, tvStreak;
     private ImageView imgAvatar;
-    private ImageView imgFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         tvCoins = findViewById(R.id.tvCoins);
         tvStreak = findViewById(R.id.tvStreak);
         imgAvatar = findViewById(R.id.imgAvatar);
-
 
         Button btnBelajar = findViewById(R.id.btnBelajar);
         Button btnKuis = findViewById(R.id.btnKuis);
@@ -67,18 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 imgAvatar.setImageURI(Uri.parse(savedUriStr));
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-        }
-
-        if (imgFrame != null) {
-            String equippedFrameId = prefs.getString("EQUIPPED_FRAME_" + activeEmail, "default");
-
-            if (equippedFrameId.equals("frame_1")) {
-                imgFrame.setImageResource(R.drawable.frame_dasar);
-            } else if (equippedFrameId.equals("frame_2")) {
-                imgFrame.setImageResource(R.drawable.frame_dasar);
-            } else {
-                imgFrame.setImageResource(android.R.color.transparent);
             }
         }
     }
