@@ -10,7 +10,7 @@ public class StoreItem {
     @NonNull
     public String itemId;
     public String itemName;
-    public String itemType; // "TITLE" atau "FRAME"
+    public String itemType;
     public int itemPrice;
 
     public StoreItem(@NonNull String itemId, String itemName, String itemType, int itemPrice) {

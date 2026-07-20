@@ -39,7 +39,6 @@ public class StoreActivity extends AppCompatActivity {
         rvStoreItems = findViewById(R.id.rvStoreItems);
         rvStoreItems.setLayoutManager(new LinearLayoutManager(this));
 
-        // KODE ASLI TEMANMU (UTUH & AMAN): Logika klik item di RecyclerView
         adapter = new StoreAdapter(storeItemList, userInventoryList, new StoreAdapter.OnItemClickListener() {
             @Override
             public void onActionClick(StoreItem item, UserInventory inventory) {
