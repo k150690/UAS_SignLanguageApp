@@ -13,7 +13,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Register extends AppCompatActivity {
-    EditText name, email, phone, password;
+    EditText name, email, password; // Variabel phone dihapus
     Button registerButton;
     TextView loginTextLink;
 
@@ -25,8 +25,7 @@ public class Register extends AppCompatActivity {
 
         name = findViewById(R.id.registerName);
         email = findViewById(R.id.registerEmail);
-        phone = findViewById(R.id.registerPhone);
-        password = findViewById(R.id.registerPassword);
+        password = findViewById(R.id.registerPassword); // findViewById phone dihapus
         registerButton = findViewById(R.id.registerButton);
         loginTextLink = findViewById(R.id.loginTextLink);
 
@@ -37,11 +36,15 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 String inputName = name.getText().toString().trim();
                 String inputEmail = email.getText().toString().trim();
-                String inputPhone = phone.getText().toString().trim();
                 String inputPass = password.getText().toString().trim();
 
                 if (inputName.isEmpty() || inputEmail.isEmpty() || inputPass.isEmpty()) {
                     Toast.makeText(Register.this, "Name, Email, and Password are required.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches()) {
+                    Toast.makeText(Register.this, "Please enter a valid email address (e.g. name@gmail.com)", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -16,16 +16,6 @@
         android:padding="16dp"
         android:gravity="center_vertical">
 
-        <!-- Visual Ikon Kiri (Biar gak sepi) -->
-        <View
-            android:id="@+id/imgItemIcon"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@drawable/frame_emas"
-            android:backgroundTint="@color/blue"
-            android:layout_marginEnd="16dp"/>
-
-        <!-- Informasi Item -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,7 +45,6 @@
                 android:layout_marginTop="6dp"/>
         </LinearLayout>
 
-        <!-- Tombol Aksi -->
         <Button
             android:id="@+id/btnAction"
             android:layout_width="wrap_content"
