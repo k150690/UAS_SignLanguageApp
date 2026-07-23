@@ -49,14 +49,80 @@
             android:padding="24dp"
             android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/tvRankingBox"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:textColor="@color/blue"
-                android:lineSpacingExtra="16dp"
-                android:fontFamily="sans-serif-medium" />
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#FEF08A"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp">
+                    <TextView
+                        android:id="@+id/tvRank1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:textColor="#854D0E"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:text="🥇 1. Loading..." />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#F1F5F9"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <TextView
+                        android:id="@+id/tvRank2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:textColor="#475569"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:text="🥈 2. Loading..." />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp" app:cardBackgroundColor="#FED7AA"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <TextView
+                        android:id="@+id/tvRank3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:textColor="#9A3412"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:text="🥉 3. Loading..." />
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E2E8F0"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:id="@+id/tvRankingBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/blue"
+                    android:lineSpacingExtra="16dp"
+                    android:fontFamily="sans-serif-medium" />
+
+            </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
 
